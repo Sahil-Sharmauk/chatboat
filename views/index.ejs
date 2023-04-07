@@ -1,0 +1,88 @@
+<HTML>
+    <head>
+        <title>EJS Template Example</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link href="index.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <style>
+            .heading{
+                display: flex;
+                justify-content: center;
+                border: 1px solid black;
+            }
+            .message{
+                display: flex;
+                justify-content: center-left;
+            }
+            .chat-container{
+                border : 2px solid black
+            }
+            .msg-inputs{
+              
+                position: fixed;
+                bottom: 2;
+                display: flex;
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .msg-inputs .msg-input[type=text] {
+                width: 80%;
+                overflow: hidden;
+                background-color: white;
+                color: black;
+                border: 2px solid blue; /* or make 'none' */
+            }
+ 
+            .msg-inputs .send-btn{
+                background-color: blue; 
+                color: white;
+                border: 2px solid blue;
+                margin-left: 2px;
+                width: 10%;
+                overflow: hidden;
+                font-size: large;
+                font-weight: bold;
+                justify-content: center;
+            }
+   
+            .send-btn:hover {
+                background-color: white;
+                color: white;
+                cursor: pointer;
+            }
+        </style>
+       <script >
+        $(document).ready(function() {
+            $('#button1').click(function(){
+                console.log('button clicked');
+                $.ajax({url: '/chat', success:function(res){
+                    console.log('server response is', res);
+                }});
+            });
+        })
+       </script>
+    </head>
+    <body>
+        <div class='container-fluid ' >
+            <div >
+                <div class="heading">
+                    <h1>ChatBoat</h1>
+                </div>
+                
+                <div class="col-md-12 message" >
+                    <!-- <span >Friend Message</span> -->
+                </div>
+
+                <div class="col-md-12 message" >
+                    <!-- <span >My Message</span> -->
+                </div>	
+
+                <div class="col-md-12 msg-inputs">
+                    <input class="msg-input" type="text" rows="3" placeholder="Message" name="message" id="message" onkeydown="handleKeyDown(event)" />
+                    <button class="send-btn" id="button1" type="button" name="send" id="send-btn" >Send</button>
+                </div>
+            </div>
+        </div>
+    </body>
+    </html>
