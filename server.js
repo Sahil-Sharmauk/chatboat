@@ -1,37 +1,31 @@
-import  express from 'express';
-import { config } from "dotenv";
-import { Configuration, OpenAIApi } from "openai";
-config()
+const  express = require('express');
+const config =  require("dotenv");
+const  { Configuration, OpenAIApi } = require("openai");
+const route = require('./routes/router.js');
+const  path = require('path')
+const bodyparser = require("body-parser")
+// const {connectOpenApi} = require("./openai.js")
 const app = express();
-const configuration = new Configuration({
-    
-    // organization: "org-v0lDFMFRRMNkcvWpSZaE876F",
-    apiKey: process.env.API_KEY,
-});
-
-const openai = new OpenAIApi(configuration);
-
-
-app.set('view engine', 'ejs')
-app.use(express.json());
-
-
-app.get('/', (req, res) => {
-    res.render('index.ejs')
-})
-
-app.post('/chat',async (req,res)=>{
-    const response = await openai.createChatCompletion({
-        model: "gpt-3.5-turbo",
-        messages: [{role: "user", content: input}],
-    });
-    console.log(response.data.choices[0].message.content);
-})
+// connectOpenApi()
 // const configuration = new Configuration({
+    
 //     // organization: "org-v0lDFMFRRMNkcvWpSZaE876F",
 //     apiKey: process.env.API_KEY,
 // });
 
+// const openai = new OpenAIApi(configuration);
+
+app.use(express.json());
+// app.use(bodyparser.urlencoded({ extended : true}))
+
+app.set('view engine', 'ejs')
+
+app.use('/css', express.static(path.resolve(__dirname , "assets/css")))
+app.use('/img', express.static(path.resolve(__dirname , "assets/img")))
+app.use('/js', express.static(path.resolve(__dirname , "assets/js")))
+console.log("dirname",__dirname)
+
+app.use('/', route)
 
 app.listen(3100,()=>{
     console.log("App listening on 3100 port")

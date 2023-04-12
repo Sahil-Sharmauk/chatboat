@@ -1,11 +1,27 @@
+.header{
+    background-color: black;
+}
+.heading{
+    color: white;
+    display: flex;
+    justify-content: center;
+    border: 1px solid black;
+}
+
+.message{
+    display: flex;
+    justify-content: center-left;
+}
 .chat-container{
-    border : 1px solid black
+    border : 2px solid black
 }
 .msg-inputs{
+  
     position: fixed;
-    bottom: 0;
+    bottom: 2;
     display: flex;
     width: 100%;
+    justify-content: center;
 }
 
 .msg-inputs .msg-input[type=text] {
@@ -32,4 +48,16 @@
     background-color: white;
     color: white;
     cursor: pointer;
+}
+.user-msg {
+    background-color: lightgrey;
+    margin-bottom: 5px;
+    margin-top: 2px;
+}
+.main-section{
+    height: 800px;
+    /* overflow-y: scroll; */
+    overflow: auto;
+    display: flex;
+    flex-direction: column-reverse;
 }
